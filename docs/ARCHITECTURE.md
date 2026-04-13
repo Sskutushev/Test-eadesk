@@ -12,6 +12,10 @@ UI triggers scenarios -> backend runs logic -> persistence + metrics + logs + er
 5. Winston logs shipped to Loki
 6. Sentry captures errors for system_error
 
+## Log labels
+
+Loki labels include `app`, `env`, `service`, `level`, `context`, and `scenario` for fast filtering in Explore.
+
 ## Services and ports
 
 | Service     | Port |

@@ -8,6 +8,7 @@ This folder turns the repo into a predictable environment for Cursor.
 - skills/ - custom skills for observability, Prisma migrations, Docker debugging, orchestration
 - commands/ - common workflows (dev start, run scenario, reset DB)
 - hooks/ - pre-commit and post-merge checks to protect observability and infra
+- orchestrator/ - context file and resume checkpoints
 
 ## How to use
 
@@ -15,3 +16,4 @@ This folder turns the repo into a predictable environment for Cursor.
 2. Use skills/ prompts when a task matches the description.
 3. Run commands/ scripts for common workflows.
 4. Hooks can be symlinked into .git/hooks if desired.
+5. Orchestrator context lives in `.cursor/orchestrator/context.json`.

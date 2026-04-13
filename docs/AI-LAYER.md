@@ -13,6 +13,10 @@ The AI layer makes the repo predictable for Cursor by providing rules, skills, c
 - docker-debug-skill: container health and networking
 - orchestrator-skill: multi-service tasks with context economy
 
+## Orchestrator context
+- Context file: `.cursor/orchestrator/context.json`
+- Resume supported via saved phase + task list
+
 ## Commands
 - dev-start.sh: bring up infra and apply migrations
 - run-test-scenario.sh: run one scenario and show signals

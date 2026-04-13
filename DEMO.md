@@ -31,9 +31,9 @@ Prometheus `http://localhost:9090`
 - Query `scenario_errors_total` returns > 0
 
 Loki (Grafana Explore)
-- Query `{app="signal-lab"} |= "ERROR"`
+- Query `{app="signal-lab",scenario="system_error"} |= "ERROR"`
 
-Sentry (if DSN configured)
+Sentry (requires DSN)
 - Issue "Simulated system error" with tag scenario=system_error
 
 ### Step 4: Slow query scenario
@@ -53,7 +53,7 @@ Sentry (if DSN configured)
 Use the orchestrator-skill to add a new scenario type 'rate_limit_exceeded'.
 It should simulate HTTP 429, sleep 2 seconds, log a WARN, and succeed.
 ```
-3. Expect a plan + atomic subtasks + verification steps
+3. Expect a plan + atomic subtasks + verification steps + resume guidance
 
 ## Final check (interviewer)
 
