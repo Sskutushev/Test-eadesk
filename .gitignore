@@ -4,5 +4,7 @@ dist/
 .next/
 coverage/
 *.log
+.npm-cache/
+*.tsbuildinfo
 REPORT_RU.md
 SUBMISSION_CHECKLIST.md
