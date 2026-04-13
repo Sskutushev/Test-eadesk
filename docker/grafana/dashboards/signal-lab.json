@@ -12,7 +12,7 @@
       "type": "timeseries",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
           "expr": "sum by (type, status) (increase(scenario_runs_total[5m]))"
         }
       ],
@@ -24,7 +24,7 @@
       "type": "gauge",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
           "expr": "100 * sum(rate(scenario_errors_total[5m])) / sum(rate(scenario_runs_total[5m]))"
         }
       ],
@@ -36,7 +36,7 @@
       "type": "stat",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
           "expr": "histogram_quantile(0.99, rate(scenario_duration_seconds_bucket[5m]))"
         }
       ],
@@ -48,8 +48,9 @@
       "type": "logs",
       "targets": [
         {
-          "datasource": "Loki",
-          "expr": "{app=\"signal-lab\"}"
+          "datasource": { "type": "loki", "uid": "loki" },
+          "expr": "{app=\"signal-lab\"}",
+          "refId": "A"
         }
       ],
       "gridPos": { "x": 0, "y": 8, "w": 24, "h": 12 }

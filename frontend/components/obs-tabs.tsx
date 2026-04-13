@@ -17,20 +17,28 @@ type ObsTab = {
 export function ObsTabs() {
   const { language } = useUi();
   const text = copy[language];
+  const grafanaUrl = process.env.NEXT_PUBLIC_GRAFANA_URL || 'http://localhost:3002';
+  const exploreState = encodeURIComponent(
+    JSON.stringify({
+      datasource: { type: 'loki', uid: 'loki' },
+      queries: [{ refId: 'A', expr: '{app="signal-lab"}' }],
+      range: { from: 'now-1h', to: 'now' },
+      mode: 'Logs',
+    }),
+  );
 
   const tabs: ObsTab[] = [
     {
       id: 'grafana',
       label: text.observability.tabs.grafana,
-      url: 'http://localhost:3002/d/signal-lab?orgId=1&refresh=5s',
+      url: `${grafanaUrl}/d/signal-lab?orgId=1&refresh=5s`,
       hint: text.observability.hints.grafana,
       autoLoad: true,
     },
     {
       id: 'explore',
       label: text.observability.tabs.explore,
-      url:
-        'http://localhost:3002/explore?orgId=1&left=%7B%22datasource%22:%7B%22type%22:%22loki%22,%22uid%22:%22loki%22%7D,%22queries%22:[%7B%22refId%22:%22A%22,%22expr%22:%22%7Bapp%3D%5C%22signal-lab%5C%22%7D%22%7D],%22range%22:%7B%22from%22:%22now-1h%22,%22to%22:%22now%22%7D,%22mode%22:%22Logs%22%7D',
+      url: `${grafanaUrl}/explore?orgId=1&left=${exploreState}`,
       hint: text.observability.hints.explore,
     },
     {
