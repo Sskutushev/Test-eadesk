@@ -46,13 +46,23 @@
       "id": 4,
       "title": "Application Logs",
       "type": "logs",
+      "datasource": { "type": "loki", "uid": "loki" },
       "targets": [
         {
           "datasource": { "type": "loki", "uid": "loki" },
           "expr": "{app=\"signal-lab\"}",
-          "refId": "A"
+          "refId": "A",
+          "queryType": "range",
+          "editorMode": "builder"
         }
       ],
+      "options": {
+        "showTime": true,
+        "wrapLogMessage": true,
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "sortOrder": "Descending"
+      },
       "gridPos": { "x": 0, "y": 8, "w": 24, "h": 12 }
     }
   ]

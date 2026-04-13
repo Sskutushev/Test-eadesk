@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <main className="mx-auto w-full max-w-[350px] px-0 py-8 space-y-8 sm:max-w-2xl sm:px-6 lg:max-w-6xl">
-      <section className="grid gap-6 justify-items-center lg:justify-items-stretch lg:grid-cols-[minmax(0,1fr)_380px]">
+      <section className="grid gap-6 justify-items-center lg:justify-items-stretch lg:grid-cols-[minmax(0,1fr)_420px]">
         <div className="space-y-4">
           <p className="text-sm uppercase tracking-[0.4em] text-muted-foreground">{text.brand}</p>
           <h1 className="text-3xl font-semibold md:text-4xl lg:text-5xl">
