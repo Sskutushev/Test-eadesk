@@ -5,6 +5,10 @@ description: Use when a task is large (>30 min), spans multiple services, or nee
 
 # Orchestrator Skill
 
+## Context file
+- Path: `.cursor/orchestrator/context.json`
+- Contains phases, task registry, and resume checkpoints.
+
 ## When to use
 - Task touches more than two services
 - Estimated time >30 minutes
@@ -40,6 +44,11 @@ curl -X POST http://localhost:3001/api/scenarios \
 curl http://localhost:3001/metrics | grep scenario_
 curl -G http://localhost:3100/loki/api/v1/query --data-urlencode 'query={app="signal-lab"}'
 ```
+
+## Resume flow
+1. Load `.cursor/orchestrator/context.json` and restore `phase` and `remainingTasks`.
+2. Re-run only the incomplete tasks (skip completed).
+3. Re-emit the verification checklist at the end.
 
 ## Context economy
 - Pass only the relevant file snippet

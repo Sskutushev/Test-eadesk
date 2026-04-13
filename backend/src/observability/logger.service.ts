@@ -44,22 +44,28 @@ export class AppLogger implements LoggerService {
     });
   }
 
-  log(message: string, context?: string) {
-    this.logger.info(message, { context });
-    this.sendToLoki('info', message, context);
+  log(message: string, context?: string, labels?: Record<string, string>) {
+    this.logger.info(message, { context, labels });
+    this.sendToLoki('info', message, context, undefined, labels);
   }
 
-  error(message: string, trace?: string, context?: string) {
-    this.logger.error(message, { trace, context });
-    this.sendToLoki('error', message, context, trace);
+  error(message: string, trace?: string, context?: string, labels?: Record<string, string>) {
+    this.logger.error(message, { trace, context, labels });
+    this.sendToLoki('error', message, context, trace, labels);
   }
 
-  warn(message: string, context?: string) {
-    this.logger.warn(message, { context });
-    this.sendToLoki('warn', message, context);
+  warn(message: string, context?: string, labels?: Record<string, string>) {
+    this.logger.warn(message, { context, labels });
+    this.sendToLoki('warn', message, context, undefined, labels);
   }
 
-  private async sendToLoki(level: string, message: string, context?: string, trace?: string) {
+  private async sendToLoki(
+    level: string,
+    message: string,
+    context?: string,
+    trace?: string,
+    extraLabels?: Record<string, string>,
+  ) {
     if (!this.lokiFallbackEnabled) return;
 
     const timestamp = `${Date.now()}000000`;
@@ -70,6 +76,7 @@ export class AppLogger implements LoggerService {
       level,
       context: context || 'unknown',
       source: 'fallback',
+      ...(extraLabels || {}),
     };
 
     const payload = {

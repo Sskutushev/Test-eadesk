@@ -30,9 +30,9 @@ docker compose ps
 | Prometheus  | http://localhost:9090         | Metrics query          |
 | Loki        | http://localhost:3100         | Logs query             |
 
-## Sentry (optional)
+## Sentry (requires DSN)
 
-If you want end-to-end Sentry verification, set in `.env` (defaults provided in `.env.example`):
+Sentry requires a valid DSN (external SaaS dependency). Set in `.env` (defaults provided in `.env.example`):
 
 ```bash
 SENTRY_DSN=...
@@ -56,6 +56,10 @@ Open `http://localhost:3001/docs` for API documentation.
 | `success`     | Fast successful request         | Counter increment, INFO log       |
 | `slow_query`  | 5 second delay                  | Histogram spike, WARN log         |
 | `system_error`| Simulated exception             | Error counter, ERROR log, Sentry  |
+
+## Loki labels
+
+Logs include labels `app`, `env`, `service`, `level`, `context`, and `scenario` for fast filtering in Explore.
 
 ## Testing
 

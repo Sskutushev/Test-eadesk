@@ -1,0 +1,56 @@
+{
+  "name": "signal-lab-orchestrator",
+  "version": "1.0",
+  "phases": [
+    {
+      "id": "analyze",
+      "goal": "Identify services, files, and risks",
+      "output": "Scope summary and constraints"
+    },
+    {
+      "id": "plan",
+      "goal": "Break work into atomic tasks",
+      "output": "Task list with owners and models"
+    },
+    {
+      "id": "execute",
+      "goal": "Apply changes per task",
+      "output": "Code updates and notes"
+    },
+    {
+      "id": "verify",
+      "goal": "Run checks and document results",
+      "output": "Verification report"
+    }
+  ],
+  "modelSelection": {
+    "fast": "Single-file edits, text updates, minor style tweaks",
+    "default": "Multi-file edits, cross-service changes",
+    "reason": "Keep context minimal and cost efficient"
+  },
+  "resume": {
+    "supported": true,
+    "fields": ["phase", "completedTasks", "remainingTasks"],
+    "instructions": "On resume, load this file, skip completedTasks, and continue from phase."
+  },
+  "tasks": [
+    {
+      "id": "backend-scenario",
+      "scope": "backend",
+      "model": "default",
+      "definition": "Add/adjust scenario logic, metrics, logs, and Sentry tags"
+    },
+    {
+      "id": "frontend-ui",
+      "scope": "frontend",
+      "model": "fast",
+      "definition": "Update scenario form, labels, or layout"
+    },
+    {
+      "id": "docs",
+      "scope": "docs",
+      "model": "fast",
+      "definition": "Update README/DEMO/AI-layer notes"
+    }
+  ]
+}

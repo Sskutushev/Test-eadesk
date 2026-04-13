@@ -20,7 +20,7 @@ export class ScenarioService {
     let createError: Error | null = null;
 
     try {
-      this.logger.log(`Starting scenario: ${type}`, 'ScenarioService');
+      this.logger.log(`Starting scenario: ${type}`, 'ScenarioService', { scenario: type });
 
       switch (type) {
         case ScenarioType.success:
@@ -44,6 +44,7 @@ export class ScenarioService {
         `Scenario ${type} failed: ${errorMsg}`,
         error?.stack,
         'ScenarioService',
+        { scenario: type },
       );
 
       Sentry.captureException(error, {
@@ -74,6 +75,7 @@ export class ScenarioService {
         `Scenario ${type} failed to persist: ${error?.message ?? 'unknown error'}`,
         error?.stack,
         'ScenarioService',
+        { scenario: type, phase: 'persist' },
       );
       Sentry.captureException(error, {
         tags: { scenario: type, phase: 'persist' },
@@ -99,18 +101,23 @@ export class ScenarioService {
   private async runSuccess() {
     const delay = this.getDelayMs(100 + Math.random() * 100);
     await new Promise((resolve) => setTimeout(resolve, delay));
-    this.logger.log('Success scenario completed', 'ScenarioService');
+    this.logger.log('Success scenario completed', 'ScenarioService', { scenario: 'success' });
   }
 
   private async runSlowQuery() {
     const delay = this.getDelayMs(5000);
-    this.logger.warn('Slow query scenario started', 'ScenarioService');
+    this.logger.warn('Slow query scenario started', 'ScenarioService', { scenario: 'slow_query' });
     await new Promise((resolve) => setTimeout(resolve, delay));
-    this.logger.warn(`Slow query took ${delay}ms`, 'ScenarioService');
+    this.logger.warn(`Slow query took ${delay}ms`, 'ScenarioService', { scenario: 'slow_query' });
   }
 
   private async runSystemError() {
-    this.logger.error('System error scenario triggered', undefined, 'ScenarioService');
+    this.logger.error(
+      'System error scenario triggered',
+      undefined,
+      'ScenarioService',
+      { scenario: 'system_error' },
+    );
     throw new Error('Simulated system error: database connection timeout');
   }
 
