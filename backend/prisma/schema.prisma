@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ScenarioRun {
+  id         String       @id @default(uuid())
+  type       ScenarioType
+  status     RunStatus
+  durationMs Int
+  errorMsg   String?
+  createdAt  DateTime     @default(now())
+
+  @@map("scenario_runs")
+}
+
+enum ScenarioType {
+  success
+  slow_query
+  system_error
+}
+
+enum RunStatus {
+  success
+  error
+}

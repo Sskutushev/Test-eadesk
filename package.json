@@ -1,0 +1,12 @@
+{
+  "name": "signal-lab",
+  "private": true,
+  "scripts": {
+    "verify:backend": "npm -C backend run typecheck && npm -C backend run lint && npm -C backend run test && npm -C backend run build",
+    "verify:frontend": "npm -C frontend run typecheck && npm -C frontend run lint && npm -C frontend run build",
+    "verify:release": "run-p verify:backend verify:frontend"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}

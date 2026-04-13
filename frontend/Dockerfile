@@ -1,0 +1,26 @@
+FROM node:20-alpine AS builder
+WORKDIR /app
+ENV NEXT_TELEMETRY_DISABLED=1
+ARG NEXT_PUBLIC_GRAFANA_URL
+ARG NEXT_PUBLIC_PROMETHEUS_URL
+ARG NEXT_PUBLIC_LOKI_URL
+ARG NEXT_PUBLIC_SENTRY_URL
+ENV NEXT_PUBLIC_GRAFANA_URL=$NEXT_PUBLIC_GRAFANA_URL
+ENV NEXT_PUBLIC_PROMETHEUS_URL=$NEXT_PUBLIC_PROMETHEUS_URL
+ENV NEXT_PUBLIC_LOKI_URL=$NEXT_PUBLIC_LOKI_URL
+ENV NEXT_PUBLIC_SENTRY_URL=$NEXT_PUBLIC_SENTRY_URL
+COPY package*.json ./
+RUN npm ci --no-audit --no-fund
+COPY . .
+RUN npm run build
+
+FROM node:20-alpine
+WORKDIR /app
+RUN apk add --no-cache curl
+ENV NEXT_TELEMETRY_DISABLED=1
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+
+EXPOSE 3000
+CMD ["node", "server.js"]

@@ -1,0 +1,40 @@
+{
+  "installedSkills": [
+    {
+      "name": "superpowers/brainstorming",
+      "version": "latest",
+      "why": "Use before new features to surface edge cases early.",
+      "trigger": "Requirements unclear or need completeness check"
+    },
+    {
+      "name": "superpowers/subagent-driven-development",
+      "version": "latest",
+      "why": "Decomposes large tasks into atomic subtasks for parallel execution.",
+      "trigger": "Task touches 3+ files or 2+ services"
+    },
+    {
+      "name": "superpowers/systematic-debugging",
+      "version": "latest",
+      "why": "Root-cause analysis for observability failures.",
+      "trigger": "Metrics/logs/errors missing"
+    },
+    {
+      "name": "superpowers/writing-plans",
+      "version": "latest",
+      "why": "Creates clear implementation plans and completion criteria.",
+      "trigger": "Before starting a new feature or phase"
+    },
+    {
+      "name": "superpowers/using-git-worktrees",
+      "version": "latest",
+      "why": "Isolated parallel development for frontend and backend.",
+      "trigger": "Parallel work across services"
+    },
+    {
+      "name": "superpowers/requesting-code-review",
+      "version": "latest",
+      "why": "Pre-review checklist for observability, tests, and docs.",
+      "trigger": "Before commit or PR"
+    }
+  ]
+}

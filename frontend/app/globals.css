@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 36 33% 96%;
+  --foreground: 222 22% 16%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 22% 16%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 22% 16%;
+  --primary: 222 56% 20%;
+  --primary-foreground: 36 33% 96%;
+  --secondary: 36 25% 90%;
+  --secondary-foreground: 222 22% 16%;
+  --muted: 36 20% 92%;
+  --muted-foreground: 222 10% 42%;
+  --accent: 24 70% 65%;
+  --accent-foreground: 222 22% 16%;
+  --destructive: 0 72% 54%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 30 16% 85%;
+  --input: 30 16% 85%;
+  --ring: 222 56% 20%;
+  --radius: 0.75rem;
+  --glow: 28 70% 65%;
+  --glow-strong: 210 90% 70%;
+}
+
+:root[data-theme='dusk'] {
+  --background: 216 34% 12%;
+  --foreground: 36 40% 92%;
+  --card: 220 24% 16%;
+  --card-foreground: 36 40% 92%;
+  --popover: 220 24% 16%;
+  --popover-foreground: 36 40% 92%;
+  --primary: 32 80% 68%;
+  --primary-foreground: 220 24% 14%;
+  --secondary: 220 16% 24%;
+  --secondary-foreground: 36 40% 92%;
+  --muted: 220 16% 22%;
+  --muted-foreground: 36 20% 70%;
+  --accent: 208 70% 65%;
+  --accent-foreground: 220 24% 14%;
+  --destructive: 0 72% 54%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 220 16% 28%;
+  --input: 220 16% 28%;
+  --ring: 32 80% 68%;
+  --glow: 32 85% 62%;
+  --glow-strong: 200 90% 70%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  color: hsl(var(--foreground));
+  background: radial-gradient(1200px 600px at 10% 0%, hsla(var(--glow) / 0.35), transparent 60%),
+    radial-gradient(1000px 500px at 90% 20%, hsla(var(--glow-strong) / 0.35), transparent 55%),
+    linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background)) 100%);
+  background-size: 160% 160%, 140% 140%, 100% 100%;
+  animation: gradientShift 14s ease-in-out infinite;
+  min-height: 100vh;
+}
+
+img {
+  image-rendering: -webkit-optimize-contrast;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(520px 240px at 15% 18%, hsla(var(--glow) / 0.22), transparent 70%),
+    radial-gradient(620px 280px at 85% 12%, hsla(var(--glow-strong) / 0.2), transparent 72%),
+    radial-gradient(680px 320px at 45% 86%, hsla(var(--glow) / 0.15), transparent 72%),
+    radial-gradient(420px 220px at 70% 60%, hsla(var(--glow-strong) / 0.12), transparent 70%);
+  opacity: 1;
+  pointer-events: none;
+  animation: floatGlow 12s ease-in-out infinite;
+  z-index: -1;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(220px 220px at 30% 40%, hsla(var(--glow) / 0.12), transparent 65%),
+    radial-gradient(260px 260px at 65% 30%, hsla(var(--glow-strong) / 0.1), transparent 70%),
+    radial-gradient(300px 300px at 55% 70%, hsla(var(--glow) / 0.08), transparent 70%);
+  opacity: 0.85;
+  pointer-events: none;
+  animation: orbitGlow 16s ease-in-out infinite;
+  z-index: -2;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 0%, 100% 0%, 0% 0%;
+  }
+  50% {
+    background-position: 100% 60%, 0% 40%, 0% 0%;
+  }
+  100% {
+    background-position: 0% 0%, 100% 0%, 0% 0%;
+  }
+}
+
+@keyframes floatGlow {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-14px) translateX(10px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+@keyframes orbitGlow {
+  0% {
+    transform: translateY(0px) translateX(0px) scale(1);
+  }
+  50% {
+    transform: translateY(16px) translateX(-18px) scale(1.05);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  body::before,
+  body::after {
+    animation: none;
+  }
+}
+
+code,
+pre,
+.font-mono {
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
